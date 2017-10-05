@@ -1,60 +1,53 @@
+console.log("MM/DD/YYYY");
 var objectMas = [
     {
-        data: 12
+        date: "10/17/2013"
     },
     {
-        data: 10
+        date: "10/15/2013"
     },
     {
-        data: 5
+        date: "08/07/2002"
     },
     {
-        data: 100
+        date: "07/05/2007"
     },
     {
-        data: 7
+        date: "01/02/2003"
     },
     {
-        data: 30
+        date: "12/01/2003"
     }
 ];
+
 console.log("Початковий масив:");
+
 for (var i = 0; i < objectMas.length; i++) {
-    console.log(objectMas[i].data);
+    console.log(objectMas[i].date);
 }
 
-
-//Sort #1
-var objectMasSort = objectMas.slice()
+//Сортування
+var objectMasSort = objectMas.slice("");
+objectMasSort.sort(function (a, b) {
+    return new Date(b.date) - new Date(a.date);
+});
+objectMasSort.reverse();
 console.log("Відсортований масив:");
-var temp;
 for (var i = 0; i < objectMasSort.length; i++) {
-    for (var j = i; j < objectMasSort.length; j++) {
-        if (objectMasSort[i].data > objectMasSort[j].data) {
-            temp = objectMasSort[i];
-            objectMasSort[i] = objectMasSort[j];
-            objectMasSort[j] = temp;
-        }
-    }
+    console.log(objectMasSort[i].date);
 }
 
-//Sort #2
-objectMasSort.sort(function (obj1, obj2) { return obj1.data > obj2.data });
-for (var i = 0; i < objectMasSort.length; i++) {
-    console.log(objectMasSort[i].data);
-}
-
-//Range
-var objectInRange = [];
-var min = 11;
-var max = 60;
-console.log("Масив в діапазоні(" + min + "-" + max + "):");
+//Діапазон
+var objectMasRange = [];
+var startDate = new Date("12/01/2002");
+var endDate = new Date("12/01/2008");
 for (var i in objectMasSort) {
-    if (objectMasSort[i].data >= min && objectMasSort[i].data <= max) {
-        objectInRange.push(objectMasSort[i].data);
+    if (new Date(objectMasSort[i].date) > startDate && new Date(objectMasSort[i].date) < endDate) {
+        objectMasRange.push(objectMasSort[i]);
     }
 }
-for (var i = 0; i < objectInRange.length; i++) {
-    console.log(objectInRange[i]);
+console.log("Масив з діапазону:");
+for (var i = 0; i < objectMasRange.length; i++) {
+    console.log(objectMasRange[i].date);
 }
 
